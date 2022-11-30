@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="bg-dark d-flex justify-content-evenly my-auto">
+        <h1 class="text-white">Welcome {{loggedUser.first_name}}</h1>
+        <div>
+            <a class="text-white btn btn-primary" href="/">Dashboard</a>
+            <a class="text-white btn btn-danger" href="/logout">Logout</a>
+        </div>
+    </nav>
+    <h1 class="text-center my-4">Create Recipe</h1>
+    <form class="w-50 m-auto border border-1 p-5 bg-light" action="/create/recipe" method="post">
+       <div class="row">
+        <input type="hidden" name="user_id" value="{{loggedUser.id}}">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="name"> Name</label>
+                <input type="name" class="form-control" name="name">
+            </div>
+            <div>
+                {% with messages = get_flashed_messages(category_filter=["name"]) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="text-danger">{{message}}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                </div>
+            <div class="form-group">
+                <label for="description"> Description</label>
+                <textarea name="description" cols="30" rows="3"></textarea>
+            </div>
+            <div>
+                {% with messages = get_flashed_messages(category_filter=["description"]) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="text-danger">{{message}}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                </div>
+            <div class="form-group">
+                <label for="instruction"> Instruction</label>
+                <textarea name="instruction" cols="30" rows="3"></textarea>
+            </div>
+            <div>
+                {% with messages = get_flashed_messages(category_filter=["instruction"]) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="text-danger">{{message}}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="dateMade"> Date made on</label>
+                <input type="date" class="form-control" name="dateMade">
+            </div>
+            <div>
+                {% with messages = get_flashed_messages(category_filter=["dateMade"]) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="text-danger">{{message}}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                </div>
+            <div class="form-group">
+                <p> Under 30?</p>
+                <label for="under30">Yes</label>
+                <input type="radio" id="1" name="under30" value="1">
+                <label for="under30">No</label>
+                <input type="radio" id="0" name="under30" value="0">
+            </div>
+            <div>
+                {% with messages = get_flashed_messages(category_filter=["under30"]) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="text-danger">{{message}}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                </div>
+        </div>
+        <input class="btn btn-success" type="submit" value="Create Recipe">
+
+        </div>
+
+
+    </form>
+    
+</body>
+</html>
